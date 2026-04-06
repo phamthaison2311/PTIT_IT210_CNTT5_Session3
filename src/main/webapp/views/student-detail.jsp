@@ -20,6 +20,6 @@
     <li><b>Trạng thái:</b> ${student.status}</li>
 </ul>
 <br>
-<a href="${pageContext.request.contextPath}/students">Quay lại danh sách</a>
+<a href="../students">Quay lại danh sách</a>
 </body>
 </html>

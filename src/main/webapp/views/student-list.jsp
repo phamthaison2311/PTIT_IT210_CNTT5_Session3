@@ -57,5 +57,6 @@
     </c:forEach>
     </tbody>
 </table>
+<a href="students/dashboard">Xem thống kê</a>
 </body>
 </html>

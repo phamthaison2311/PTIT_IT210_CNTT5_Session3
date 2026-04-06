@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import re.miniproject_ss3.service.StudentService;
 
+import java.util.Map;
+
 @Controller
 public class StudentController {
 
@@ -27,5 +29,12 @@ public class StudentController {
     public String detail(@RequestParam("id") int id, Model model) {
         model.addAttribute("student", studentService.findById(id));
         return "student-detail";
+    }
+
+    @GetMapping("/students/dashboard")
+    public String dashboard(Model model) {
+        Map<String, Object> stats = studentService.getDashboardStats();
+        model.addAttribute("stats", stats);
+        return "dashboard";
     }
 }

@@ -54,12 +54,27 @@ public class StudentService {
         Map<String, Object> stats = new HashMap<>();
 
         int total = list.size();
+
         double avgGpa = list.stream().mapToDouble(Student::getGpa).average().orElse(0.0);
         Student valedictorian = list.stream().max(Comparator.comparing(Student::getGpa)).orElse(null);
+
+        // Đếm số lượng theo trạng thái
+        long countStudying = list.stream().filter(s -> "Đang học".equals(s.getStatus())).count();
+        long countReserved = list.stream().filter(s -> "Bảo lưu".equals(s.getStatus())).count();
+        long countGraduated = list.stream().filter(s -> "Tốt nghiệp".equals(s.getStatus())).count();
+
+        // Tính tỷ lệ % cho từng trạng thái
+        double pctStudying = (total > 0) ? (countStudying * 100.0 / total) : 0;
+        double pctReserved = (total > 0) ? (countReserved * 100.0 / total) : 0;
+        double pctGraduated = (total > 0) ? (countGraduated * 100.0 / total) : 0;
 
         stats.put("total", total);
         stats.put("avgGpa", Math.round(avgGpa * 100.0) / 100.0);
         stats.put("valedictorian", valedictorian);
+
+        stats.put("pctStudying", Math.round(pctStudying * 10.0) / 10.0);
+        stats.put("pctReserved", Math.round(pctReserved * 10.0) / 10.0);
+        stats.put("pctGraduated", Math.round(pctGraduated * 10.0) / 10.0);
 
         return stats;
     }
