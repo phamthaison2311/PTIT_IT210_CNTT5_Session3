@@ -31,6 +31,7 @@ public class StudentController {
         return "student-detail";
     }
 
+    // Xem thống kê (UC-4)
     @GetMapping("/students/dashboard")
     public String dashboard(Model model) {
         Map<String, Object> stats = studentService.getDashboardStats();
